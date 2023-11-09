@@ -1,0 +1,69 @@
+import { Gasbot } from '@gasbot/widget'
+import { Trans } from '@lingui/macro'
+import { Percent } from '@uniswap/sdk-core'
+import { useGasbot } from 'hooks/useGasbot'
+import { InterfaceTrade } from 'state/routing/types'
+import styled from 'styled-components'
+import { ThemedText } from 'theme/components'
+
+import { RowBetween, RowFixed } from '../Row'
+import SettingsTab from '../Settings'
+import SwapBuyFiatButton from './SwapBuyFiatButton'
+
+const StyledSwapHeader = styled(RowBetween)`
+  margin-bottom: 10px;
+  color: ${({ theme }) => theme.neutral2};
+`
+
+const HeaderButtonContainer = styled(RowFixed)`
+  padding: 0 12px;
+  gap: 16px;
+`
+
+const GasbotWrapper = styled.div`
+  .gasbot > button {
+    height: fit-content;
+    background: transparent;
+  }
+
+  .gasbot > button > svg {
+    width: 1.4rem;
+    height: 1.4rem;
+    color: ${({ theme }) => theme.neutral2};
+  }
+`
+
+export default function SwapHeader({
+  autoSlippage,
+  chainId,
+  trade,
+}: {
+  autoSlippage: Percent
+  chainId?: number
+  trade?: InterfaceTrade
+}) {
+  const { address, accentColor, switchNetwork, signTypedData } = useGasbot()
+
+  return (
+    <StyledSwapHeader>
+      <HeaderButtonContainer>
+        <ThemedText.SubHeader>
+          <Trans>Swap</Trans>
+        </ThemedText.SubHeader>
+        <SwapBuyFiatButton />
+      </HeaderButtonContainer>
+      <RowFixed>
+        <GasbotWrapper>
+          <Gasbot
+            switchNetwork={switchNetwork}
+            permitSigner={signTypedData}
+            accentColor={accentColor}
+            chainId={chainId}
+            address={address}
+          />
+        </GasbotWrapper>
+        <SettingsTab autoSlippage={autoSlippage} chainId={chainId} trade={trade} />
+      </RowFixed>
+    </StyledSwapHeader>
+  )
+}
