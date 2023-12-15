@@ -1,18 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { ethers, JsonRpcSigner } from "ethers";
 
-import { Demo } from "./Demo";
-import { ethers, BrowserProvider } from "ethers";
+import "@gasbot/widget/style.css";
+import { Gasbot } from "@gasbot/widget";
 
 function App() {
-  const [connected, setConnected] = useState(false);
-  const [provider, setProvider] = useState<BrowserProvider>();
+  const [signer, setSigner] = useState<JsonRpcSigner>();
 
-  useEffect(() => {
-    if (window.ethereum) {
-      const browserProvider = new ethers.BrowserProvider(window.ethereum);
-      setProvider(browserProvider);
+  const connect = async () => {
+    const ethereum = window.ethereum;
+
+    if (ethereum) {
+      const browserProvider = new ethers.BrowserProvider(ethereum);
+      const currentSigner = await browserProvider.getSigner();
+
+      setSigner(currentSigner);
+
+      ethereum.on("accountsChanged", async () => {
+        setSigner(undefined);
+      });
     }
-  }, []);
+  };
 
   return (
     <div
@@ -23,18 +31,11 @@ function App() {
         placeItems: "center",
       }}
     >
-      {!connected && (
-        <button
-          onClick={async () => {
-            await provider?.send("eth_requestAccounts", []);
-            setConnected(true);
-          }}
-        >
-          Connect
-        </button>
+      {!signer ? (
+        <button onClick={connect}>Connect</button>
+      ) : (
+        <Gasbot walletClientOrSigner={signer} />
       )}
-
-      {connected && <Demo />}
     </div>
   );
 }

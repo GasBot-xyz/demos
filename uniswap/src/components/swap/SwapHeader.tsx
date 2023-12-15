@@ -1,9 +1,12 @@
+import '@gasbot/widget/style.css'
+
 import { Gasbot } from '@gasbot/widget'
 import { Trans } from '@lingui/macro'
 import { Percent } from '@uniswap/sdk-core'
-import { useGasbot } from 'hooks/useGasbot'
+import { useWeb3React } from '@web3-react/core'
 import { InterfaceTrade } from 'state/routing/types'
 import styled from 'styled-components'
+import { darkTheme } from 'theme/colors'
 import { ThemedText } from 'theme/components'
 
 import { RowBetween, RowFixed } from '../Row'
@@ -42,7 +45,8 @@ export default function SwapHeader({
   chainId?: number
   trade?: InterfaceTrade
 }) {
-  const { address, accentColor, switchNetwork, signTypedData } = useGasbot()
+  const { provider } = useWeb3React()
+  const signer = provider?.getSigner()
 
   return (
     <StyledSwapHeader>
@@ -55,11 +59,9 @@ export default function SwapHeader({
       <RowFixed>
         <GasbotWrapper>
           <Gasbot
-            switchNetwork={switchNetwork}
-            permitSigner={signTypedData}
-            accentColor={accentColor}
-            chainId={chainId}
-            address={address}
+            walletClientOrSigner={signer}
+            accentColor={darkTheme.accent1}
+            limitDestination={chainId as React.ComponentProps<typeof Gasbot>['limitDestination']}
           />
         </GasbotWrapper>
         <SettingsTab autoSlippage={autoSlippage} chainId={chainId} trade={trade} />

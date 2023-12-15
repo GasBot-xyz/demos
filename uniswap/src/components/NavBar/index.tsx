@@ -29,6 +29,64 @@ const Nav = styled.nav`
   width: 100%;
   height: ${({ theme }) => theme.navHeight}px;
   z-index: 2;
+  .gasbot-highlight {
+    position: relative;
+    top: -0.3rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 100%;
+
+    &:before {
+      content: '';
+      position: relative;
+      display: block;
+      width: 300%;
+      height: 300%;
+      box-sizing: border-box;
+      margin-left: -100%;
+      margin-top: -100%;
+      border-radius: 45px;
+      background-color: ${({ theme }) => theme.accent1};
+      animation: pulse-ring 1.25s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-color: ${({ theme }) => theme.accent1};
+      border-radius: 15px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+      animation: pulse-dot 1.25s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.4s infinite;
+    }
+    @keyframes pulse-ring {
+      0% {
+        transform: scale(0.4);
+      }
+
+      80%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes pulse-dot {
+      0% {
+        transform: scale(0.7);
+      }
+
+      50% {
+        transform: scale(1);
+      }
+
+      100% {
+        transform: scale(0.7);
+      }
+    }
+  }
 `
 
 interface MenuItemProps {
@@ -67,7 +125,14 @@ export const PageTabs = () => {
   return (
     <>
       <MenuItem href="/swap" isActive={pathname.startsWith('/swap')}>
-        <Trans>Swap</Trans>
+        <Trans>
+          Swap <span className="gasbot-highlight" />
+        </Trans>
+      </MenuItem>
+      <MenuItem href="/gasbot" isActive={pathname.startsWith('/gasbot')}>
+        <Trans>
+          Gasbot <span className="gasbot-highlight" />
+        </Trans>
       </MenuItem>
       {infoExplorePageEnabled ? (
         <MenuItem href={`/explore/tokens/${chainName.toLowerCase()}`} isActive={pathname.startsWith('/explore')}>
@@ -88,9 +153,6 @@ export const PageTabs = () => {
           <Trans>Pools</Trans>
         </MenuItem>
       </Box>
-      <MenuItem href="/gasbot" isActive={pathname.startsWith('/gasbot')}>
-        <Trans>Gasbot</Trans>
-      </MenuItem>
       <Box marginY="4">
         <MenuDropdown />
       </Box>

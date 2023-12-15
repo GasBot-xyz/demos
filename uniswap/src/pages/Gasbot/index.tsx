@@ -2,25 +2,20 @@ import '@gasbot/widget/style.css'
 
 import { Gasbot } from '@gasbot/widget'
 import { InterfacePageName } from '@uniswap/analytics-events'
+import { useWeb3React } from '@web3-react/core'
 import { Trace } from 'analytics'
 import { PageWrapper } from 'components/swap/styled'
-import { useGasbot } from 'hooks/useGasbot'
+import { darkTheme } from 'theme/colors'
 
 export default function GasbotPage() {
-  const { address, chainId, accentColor, switchNetwork, signTypedData } = useGasbot()
+  const { provider } = useWeb3React()
+  const signer = provider?.getSigner()
 
   return (
     <Trace page={InterfacePageName.SWAP_PAGE} shouldLogImpression>
       <PageWrapper>
         <div style={{ width: 'fit-content', margin: 'auto' }}>
-          <Gasbot
-            renderMode="component"
-            switchNetwork={switchNetwork}
-            permitSigner={signTypedData}
-            accentColor={accentColor}
-            chainId={chainId}
-            address={address}
-          />
+          {signer && <Gasbot renderMode="component" accentColor={darkTheme.accent1} walletClientOrSigner={signer} />}
         </div>
       </PageWrapper>
     </Trace>

@@ -360,10 +360,12 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-8.52.0.tgz#78fe5f117840f69dc4a353adf9b9cd926353378c"
   integrity sha512-mjZVbpaeMZludF2fsWLD0Z9gCref1Tk4i9+wddjRvpUNqqcndPkBD09N/Mapey0b3jaXbLm2kICwFv2E64QinA==
 
-"@gasbot/widget@0.1.11":
-  version "0.1.11"
-  resolved "https://registry.yarnpkg.com/@gasbot/widget/-/widget-0.1.11.tgz#c1f694a4e01adad06ad7358a318b0f2766c1d6e3"
-  integrity sha512-LTC5i9w3h6eBSZBwD/RfjJMoBVYlaaiuZuAyLhAsGmeWG/NwhjV0Btbm4T8tLgVwZpJEkKh/cfY7XRk4RhDr2Q==
+"@gasbot/widget@^0.2.19":
+  version "0.2.19"
+  resolved "https://registry.yarnpkg.com/@gasbot/widget/-/widget-0.2.19.tgz#00eacdb926e3cafe6567ee9eda6c0e691b396c83"
+  integrity sha512-GTvVbpdfCTAXFIIjIg3722d+PQVyNx/XMeCaLhvRlFASTVv1tL9U2r7LZwCxakoOA/P9pQGCC5wHFTfQExsl+A==
+  dependencies:
+    ethers "^6.9.0"
 
 "@humanwhocodes/config-array@^0.11.13":
   version "0.11.13"
@@ -961,6 +963,19 @@ ethers@^6.8.1:
   version "6.8.1"
   resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.8.1.tgz#ee2a1a39b5f62a13678f90ccd879175391d0a2b4"
   integrity sha512-iEKm6zox5h1lDn6scuRWdIdFJUCGg3+/aQWu0F4K0GVyEZiktFkqrJbRjTn1FlYEPz7RKA707D6g5Kdk6j7Ljg==
+  dependencies:
+    "@adraffy/ens-normalize" "1.10.0"
+    "@noble/curves" "1.2.0"
+    "@noble/hashes" "1.3.2"
+    "@types/node" "18.15.13"
+    aes-js "4.0.0-beta.5"
+    tslib "2.4.0"
+    ws "8.5.0"
+
+ethers@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.9.0.tgz#a4534bdcdfde306aee94ef32f3d5c70d7e33fcb9"
+  integrity sha512-pmfNyQzc2mseLe91FnT2vmNaTt8dDzhxZ/xItAV7uGsF4dI4ek2ufMu3rAkgQETL/TIs0GS5A+U05g9QyWnv3Q==
   dependencies:
     "@adraffy/ens-normalize" "1.10.0"
     "@noble/curves" "1.2.0"
