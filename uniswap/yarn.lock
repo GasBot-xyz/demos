@@ -2355,10 +2355,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.1.tgz#058d8a02354f3c78e369d452c15d33557ec1b705"
   integrity sha512-mvtOvXNNVLlF1p/UbLgLrmz2RCOl6Ow+TqyiK10SosoLKX7edsXYiHFHb7XIZdjII6F2sJVPPsJXWhBnbXT2DQ==
 
-"@gasbot/widget@^0.2.29":
-  version "0.2.29"
-  resolved "https://registry.yarnpkg.com/@gasbot/widget/-/widget-0.2.29.tgz#7f0447b40e15aab99c63f9832c90d1024d410813"
-  integrity sha512-OD8rslV1Itwincv2nBAAtH5aDhxu3LwhAMy7GJG4UO2FjBDmuufSP48wk2P8JmG1s1bHQEyIoxuAOPnBgBq+SA==
+"@gasbot/widget@^0.2.30":
+  version "0.2.30"
+  resolved "https://registry.yarnpkg.com/@gasbot/widget/-/widget-0.2.30.tgz#b583fea522b7d84291ace79b081eb67779d5e022"
+  integrity sha512-oHYbUU2SCxCyw+zDs3GXlHxxmk1z8y0tekd+rPT8P6BanrYFHcKJJkHLktVp5wI8W8k224WBoRmJozkp55hpMA==
 
 "@graphql-codegen/add@^4.0.1":
   version "4.0.1"

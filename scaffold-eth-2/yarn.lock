@@ -811,13 +811,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gasbot/widget@npm:^0.2.29":
-  version: 0.2.29
-  resolution: "@gasbot/widget@npm:0.2.29"
+"@gasbot/widget@npm:^0.2.30":
+  version: 0.2.30
+  resolution: "@gasbot/widget@npm:0.2.30"
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 6d02d1d2782c10e881751ec67fe8d6fa3fe4b09d0a13ca3b94dad74c1044fa09b8778b5cd85ca4bb65aa033943acfaf9206f6b9c4fecc90ba2a199d6c260e59f
+  checksum: 7ecc05213415b5e9887cb2fff6fb88c3dcf11481584d29fc50e02a1ac2c9adf8ebb17a84c796428f50610087b9bf6314ac4d8aa95ec738cb87d9f34f2e549392
   languageName: node
   linkType: hard
 
@@ -1957,7 +1957,7 @@ __metadata:
   resolution: "@se-2/nextjs@workspace:packages/nextjs"
   dependencies:
     "@ethersproject/providers": ^5.7.2
-    "@gasbot/widget": ^0.2.29
+    "@gasbot/widget": ^0.2.30
     "@heroicons/react": ^2.0.11
     "@rainbow-me/rainbowkit": 1.1.2
     "@trivago/prettier-plugin-sort-imports": ^4.1.1

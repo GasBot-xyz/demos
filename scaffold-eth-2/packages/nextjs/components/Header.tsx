@@ -107,7 +107,7 @@ export const Header = () => {
         <RainbowKitCustomConnectButton />
         <FaucetButton />
         <div className="scale-75 ml-1">
-          <Gasbot walletClientOrSigner={data ?? undefined} />
+          <Gasbot walletClientOrSigner={data} />
         </div>
       </div>
     </div>
