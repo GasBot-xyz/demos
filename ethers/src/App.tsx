@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ethers, JsonRpcSigner } from "ethers";
 
 import "@gasbot/widget/style.css";
@@ -7,9 +7,8 @@ import { Gasbot } from "@gasbot/widget";
 function App() {
   const [signer, setSigner] = useState<JsonRpcSigner>();
 
-  const connect = async () => {
-    const ethereum = window.ethereum;
-
+  const ethereum = window.ethereum;
+  const connect = useCallback(async () => {
     if (ethereum) {
       const browserProvider = new ethers.BrowserProvider(ethereum);
       const currentSigner = await browserProvider.getSigner();
@@ -20,7 +19,13 @@ function App() {
         setSigner(undefined);
       });
     }
-  };
+  }, [ethereum]);
+
+  useEffect(() => {
+    ethereum?.on("chainChanged", () => {
+      connect()
+    });
+  }, [connect, ethereum]);
 
   return (
     <div
