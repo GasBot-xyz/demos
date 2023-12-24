@@ -1,6 +1,6 @@
 import '@gasbot/widget/style.css'
 
-import { Gasbot } from '@gasbot/widget'
+import { Gasbot, GasbotConfig } from '@gasbot/widget'
 import { Trans } from '@lingui/macro'
 import { Percent } from '@uniswap/sdk-core'
 import { useWeb3React } from '@web3-react/core'
@@ -61,7 +61,7 @@ export default function SwapHeader({
           <Gasbot
             walletClientOrSigner={signer}
             accentColor={darkTheme.accent1}
-            limitDestination={chainId as React.ComponentProps<typeof Gasbot>['limitDestination']}
+            limitDestination={chainId as GasbotConfig['limitDestination']}
           />
         </GasbotWrapper>
         <SettingsTab autoSlippage={autoSlippage} chainId={chainId} trade={trade} />

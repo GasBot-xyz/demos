@@ -1,15 +1,12 @@
-import "@gasbot/widget/style.css";
-
 import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { Gasbot } from "@gasbot/widget";
 import { useWalletClient } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
-
-import { Gasbot } from "@gasbot/widget";
 
 interface HeaderMenuLink {
   label: string;
@@ -110,7 +107,7 @@ export const Header = () => {
         <RainbowKitCustomConnectButton />
         <FaucetButton />
         <div className="scale-75 ml-1">
-          <Gasbot walletClientOrSigner={data} />
+          <Gasbot walletClientOrSigner={data ?? undefined} />
         </div>
       </div>
     </div>
