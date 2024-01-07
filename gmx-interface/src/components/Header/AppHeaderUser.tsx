@@ -15,6 +15,8 @@ import "./Header.css";
 import { HeaderLink } from "./HeaderLink";
 import useWallet from "lib/wallets/useWallet";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
+import "@gasbot/widget/style.css";
+import { Gasbot } from "@gasbot/widget";
 
 type Props = {
   openSettings: () => void;
@@ -64,7 +66,7 @@ export function AppHeaderUser({
   tradePageVersion,
 }: Props) {
   const { chainId } = useChainId();
-  const { active, account } = useWallet();
+  const { active, account, signer } = useWallet();
   const { openConnectModal } = useConnectModal();
   const showConnectionOptions = !isHomeSite();
 
@@ -139,6 +141,10 @@ export function AppHeaderUser({
       ) : (
         <LanguagePopupHome />
       )}
+
+      <div style={{ display: "grid", placeItems: "center", marginLeft: "1.5rem" }}>
+        <Gasbot walletClientOrSigner={signer} accentColor="#FFFFFF" />
+      </div>
     </div>
   );
 }

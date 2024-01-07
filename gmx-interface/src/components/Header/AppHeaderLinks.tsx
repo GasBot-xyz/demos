@@ -9,10 +9,6 @@ import { isHomeSite } from "lib/legacy";
 import ExternalLink from "components/ExternalLink/ExternalLink";
 import logoImg from "img/logo_GMX.svg";
 
-import "../../../node_modules/@gasbot/widget/dist/index.css";
-import { Gasbot } from "@gasbot/widget";
-import useWallet from "lib/wallets/useWallet";
-
 type Props = {
   small?: boolean;
   clickCloseIcon?: () => void;
@@ -28,8 +24,6 @@ export function AppHeaderLinks({
   redirectPopupTimestamp,
   showRedirectModal,
 }: Props) {
-  const { signer } = useWallet()
-
   return (
     <div className="App-header-links">
       {small && (
@@ -86,8 +80,6 @@ export function AppHeaderLinks({
         <ExternalLink href="https://docs.gmx.io/">
           <Trans>Docs</Trans>
         </ExternalLink>
-
-        <Gasbot walletClientOrSigner={signer} />
       </div>
       {small && !isHomeSite() && (
         <div className="App-header-link-container">

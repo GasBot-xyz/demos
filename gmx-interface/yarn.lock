@@ -2978,47 +2978,47 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^1.4.2":
-  version: 1.5.2
-  resolution: "@floating-ui/core@npm:1.5.2"
+"@floating-ui/core@npm:^1.5.3":
+  version: 1.5.3
+  resolution: "@floating-ui/core@npm:1.5.3"
   dependencies:
-    "@floating-ui/utils": ^0.1.3
-  checksum: e22de0a5e8a703fe14d9cfb72aeb67c0056c4ae6aa241539934ecb2af56448534b434a7587ecb5de154c21c3c73e44c19249b05c6b67a58eae7861188c8e69ac
+    "@floating-ui/utils": ^0.2.0
+  checksum: 72af8563e1742791acee82e86f82a0fbca7445809988d31eea3fd5771909463aa7655a6cb001cc244f8fe3a9de600420257e4dfb887ca33e2a31ac47b52e39a2
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^1.5.1":
-  version: 1.5.3
-  resolution: "@floating-ui/dom@npm:1.5.3"
+"@floating-ui/dom@npm:^1.5.4":
+  version: 1.5.4
+  resolution: "@floating-ui/dom@npm:1.5.4"
   dependencies:
-    "@floating-ui/core": ^1.4.2
-    "@floating-ui/utils": ^0.1.3
-  checksum: 00053742064aac70957f0bd5c1542caafb3bfe9716588bfe1d409fef72a67ed5e60450d08eb492a77f78c22ed1ce4f7955873cc72bf9f9caf2b0f43ae3561c21
+    "@floating-ui/core": ^1.5.3
+    "@floating-ui/utils": ^0.2.0
+  checksum: 5e6f05532ff4e6daf9f2d91534184d8f942ddb8fd260c2543a49bdf0c0ff69fd0867937ce1d023126008724ac238f8fc89b5e48f82cdf9f8355a1d04edd085bd
   languageName: node
   linkType: hard
 
 "@floating-ui/react-dom@npm:^2.0.0":
-  version: 2.0.4
-  resolution: "@floating-ui/react-dom@npm:2.0.4"
+  version: 2.0.5
+  resolution: "@floating-ui/react-dom@npm:2.0.5"
   dependencies:
-    "@floating-ui/dom": ^1.5.1
+    "@floating-ui/dom": ^1.5.4
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: 91b2369e25f84888486e48c1656117468248906034ed482d411bb9ed1061b908dd32435b4ca3d0cd0ca6083291510a98ce74d76c671d5cc25b0c41e5fa824bae
+  checksum: 24cadf4626ae860b59cd3b86e0d8e9a51f1120f52aaa89cbed9425d78d0e0034e097a16bb022628996eb2386783c44b10aeb3c2988083fc046e0480e573d575d
   languageName: node
   linkType: hard
 
-"@floating-ui/utils@npm:^0.1.3":
-  version: 0.1.6
-  resolution: "@floating-ui/utils@npm:0.1.6"
-  checksum: b34d4b5470869727f52e312e08272edef985ba5a450a76de0917ba0a9c6f5df2bdbeb99448e2c60f39b177fb8981c772ff1831424e75123471a27ebd5b52c1eb
+"@floating-ui/utils@npm:^0.2.0":
+  version: 0.2.1
+  resolution: "@floating-ui/utils@npm:0.2.1"
+  checksum: 9ed4380653c7c217cd6f66ae51f20fdce433730dbc77f95b5abfb5a808f5fdb029c6ae249b4e0490a816f2453aa6e586d9a873cd157fdba4690f65628efc6e06
   languageName: node
   linkType: hard
 
-"@gasbot/widget@npm:0.2.40":
-  version: 0.2.40
-  resolution: "@gasbot/widget@npm:0.2.40"
+"@gasbot/widget@npm:0.2.42":
+  version: 0.2.42
+  resolution: "@gasbot/widget@npm:0.2.42"
   dependencies:
     "@radix-ui/react-dialog": ^1.0.5
     "@radix-ui/react-scroll-area": ^1.0.5
@@ -3035,7 +3035,7 @@ __metadata:
     ethers: ^5.0.0 || ^6.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: fae99628a29a20e2c0ea405946985d0a7453a89be006198ddc70525bdb349f0878a1cec9acbf1e638604775b911318c3a10b49e2f77a7970a96dd5f762fd395a
+  checksum: 36947b19153ab27182bc57ef1e42aa04acb44fb9af233db82c2eaae77f5faaee2d338c1c1548da6f12edd49ac94e60b5d422cf21367e67dbea755ee14c360bf9
   languageName: node
   linkType: hard
 
@@ -9577,12 +9577,12 @@ __metadata:
   linkType: hard
 
 "eip1193bridge@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "eip1193bridge@npm:1.0.3"
+  version: 1.0.4
+  resolution: "eip1193bridge@npm:1.0.4"
   dependencies:
     ethers: ^6.0.0
     events: ^3.3.0
-  checksum: 3837d1ccdbc55951b0fdca06c29b96cc2a073b0167e7d0e9cb6420d82cdb4965dc0b016cbbfca5f57af5b633c62dcbd976a1c55b6e6e0876265d98912447cec3
+  checksum: cad3d8414f6569fbabf6420cd619f6d3ced84feecdc561a31f19156fe47f3943b4f7325fd67e90f221382ccd69aa9008b540fbc294a288dde48e8b30af393271
   languageName: node
   linkType: hard
 
@@ -11038,7 +11038,7 @@ __metadata:
     "@davatar/react": 1.8.1
     "@ethersproject/providers": 5.5.1
     "@ethersproject/units": 5.5.0
-    "@gasbot/widget": 0.2.40
+    "@gasbot/widget": 0.2.42
     "@headlessui/react": 1.6.1
     "@lingui/cli": 3.13.3
     "@lingui/core": 3.13.3
