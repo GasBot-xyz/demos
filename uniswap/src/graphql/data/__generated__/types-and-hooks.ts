@@ -33,7 +33,7 @@ export type Scalars = {
 export type ActivityDetails = SwapOrderDetails | TransactionDetails;
 
 export type ActivityDetailsInput = {
-  readonly transaction?: InputMaybe<TransactionDetailsInput>;
+  readonly transactionDetails?: InputMaybe<TransactionDetailsInput>;
 };
 
 /**
@@ -79,7 +79,7 @@ export type AmountChange = {
 };
 
 export type AmountInput = {
-  readonly currency: Currency;
+  readonly currency?: InputMaybe<Currency>;
   readonly value: Scalars['Float'];
 };
 
@@ -90,6 +90,13 @@ export type ApplicationContract = IContract & {
   readonly icon?: Maybe<Image>;
   readonly id: Scalars['ID'];
   readonly name?: Maybe<Scalars['String']>;
+};
+
+export type ApplicationContractInput = {
+  readonly address: Scalars['String'];
+  readonly chain: Chain;
+  readonly icon?: InputMaybe<ImageInput>;
+  readonly name?: InputMaybe<Scalars['String']>;
 };
 
 export type AssetActivity = {
@@ -177,6 +184,11 @@ export enum Currency {
   Vnd = 'VND'
 }
 
+export type CurrencyAmountInput = {
+  readonly currency: Currency;
+  readonly value: Scalars['Float'];
+};
+
 export type DescriptionTranslations = {
   readonly __typename?: 'DescriptionTranslations';
   readonly descriptionEnUs?: Maybe<Scalars['String']>;
@@ -208,6 +220,11 @@ export type Dimensions = {
   readonly width?: Maybe<Scalars['Float']>;
 };
 
+export type DimensionsInput = {
+  readonly height?: InputMaybe<Scalars['Float']>;
+  readonly width?: InputMaybe<Scalars['Float']>;
+};
+
 export enum HighLow {
   High = 'HIGH',
   Low = 'LOW'
@@ -237,6 +254,11 @@ export type Image = {
   readonly __typename?: 'Image';
   readonly dimensions?: Maybe<Dimensions>;
   readonly id: Scalars['ID'];
+  readonly url: Scalars['String'];
+};
+
+export type ImageInput = {
+  readonly dimensions?: InputMaybe<DimensionsInput>;
   readonly url: Scalars['String'];
 };
 
@@ -326,6 +348,7 @@ export type NftApproval = {
 export type NftApprovalInput = {
   readonly approvedAddress: Scalars['String'];
   readonly asset: NftAssetInput;
+  readonly nftStandard: NftStandard;
 };
 
 export type NftApproveForAll = {
@@ -341,6 +364,7 @@ export type NftApproveForAll = {
 export type NftApproveForAllInput = {
   readonly approved: Scalars['Boolean'];
   readonly asset: NftAssetInput;
+  readonly nftStandard: NftStandard;
   readonly operatorAddress: Scalars['String'];
 };
 
@@ -400,7 +424,16 @@ export type NftAssetEdge = {
 };
 
 export type NftAssetInput = {
-  readonly address: Scalars['String'];
+  readonly animationUrl?: InputMaybe<Scalars['String']>;
+  readonly collection?: InputMaybe<NftCollectionInput>;
+  readonly description?: InputMaybe<Scalars['String']>;
+  readonly image?: InputMaybe<ImageInput>;
+  readonly isSpam?: InputMaybe<Scalars['Boolean']>;
+  readonly mediaType?: InputMaybe<MediaType>;
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly nftContract?: InputMaybe<NftContractInput>;
+  readonly smallImage?: InputMaybe<ImageInput>;
+  readonly thumbnail?: InputMaybe<ImageInput>;
   readonly tokenId: Scalars['String'];
 };
 
@@ -450,6 +483,11 @@ export type NftBalance = {
   readonly quantity?: Maybe<Scalars['Int']>;
 };
 
+export type NftBalanceAssetInput = {
+  readonly address: Scalars['String'];
+  readonly tokenId: Scalars['String'];
+};
+
 export type NftBalanceConnection = {
   readonly __typename?: 'NftBalanceConnection';
   readonly edges: ReadonlyArray<NftBalanceEdge>;
@@ -464,7 +502,7 @@ export type NftBalanceEdge = {
 
 export type NftBalancesFilterInput = {
   readonly addresses?: InputMaybe<ReadonlyArray<Scalars['String']>>;
-  readonly assets?: InputMaybe<ReadonlyArray<NftAssetInput>>;
+  readonly assets?: InputMaybe<ReadonlyArray<NftBalanceAssetInput>>;
   readonly filterSpam?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -534,6 +572,12 @@ export type NftCollectionEdge = {
   readonly __typename?: 'NftCollectionEdge';
   readonly cursor: Scalars['String'];
   readonly node: NftCollection;
+};
+
+export type NftCollectionInput = {
+  readonly collectionId: Scalars['String'];
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly nftContracts?: InputMaybe<ReadonlyArray<NftContractInput>>;
 };
 
 export type NftCollectionMarket = {
@@ -619,6 +663,15 @@ export type NftContract = IContract & {
   readonly standard?: Maybe<NftStandard>;
   readonly symbol?: Maybe<Scalars['String']>;
   readonly totalSupply?: Maybe<Scalars['Int']>;
+};
+
+export type NftContractInput = {
+  readonly address: Scalars['String'];
+  readonly chain: Chain;
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly standard?: InputMaybe<NftStandard>;
+  readonly symbol?: InputMaybe<Scalars['String']>;
+  readonly totalSupply?: InputMaybe<Scalars['Int']>;
 };
 
 export type NftFee = {
@@ -738,6 +791,7 @@ export type NftTransfer = {
 export type NftTransferInput = {
   readonly asset: NftAssetInput;
   readonly direction: TransactionDirection;
+  readonly nftStandard: NftStandard;
   readonly recipient: Scalars['String'];
   readonly sender: Scalars['String'];
 };
@@ -846,7 +900,6 @@ export type PushNotification = {
   readonly viewerHeader: Scalars['AWSJSON'];
 };
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type Query = {
   readonly __typename?: 'Query';
   readonly convert?: Maybe<Amount>;
@@ -868,20 +921,20 @@ export type Query = {
   readonly tokens?: Maybe<ReadonlyArray<Maybe<Token>>>;
   readonly topCollections?: Maybe<NftCollectionConnection>;
   readonly topTokens?: Maybe<ReadonlyArray<Maybe<Token>>>;
-  /**   returns top pools by total value locked */
+  /**   returns top v2 pairs sorted by total value locked in desc order */
+  readonly topV2Pairs?: Maybe<ReadonlyArray<V2Pair>>;
+  /**   returns top v3 pools sorted by total value locked in desc order */
   readonly topV3Pools?: Maybe<ReadonlyArray<V3Pool>>;
   readonly transactionNotification?: Maybe<TransactionNotification>;
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryConvertArgs = {
-  fromAmount: AmountInput;
+  fromAmount: CurrencyAmountInput;
   toCurrency: Currency;
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryNftActivityArgs = {
   after?: InputMaybe<Scalars['String']>;
   chain?: InputMaybe<Chain>;
@@ -890,7 +943,6 @@ export type QueryNftActivityArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryNftAssetsArgs = {
   address: Scalars['String'];
   after?: InputMaybe<Scalars['String']>;
@@ -904,7 +956,6 @@ export type QueryNftAssetsArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryNftBalancesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -916,7 +967,6 @@ export type QueryNftBalancesArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryNftCollectionBalancesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -927,7 +977,6 @@ export type QueryNftCollectionBalancesArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryNftCollectionsArgs = {
   after?: InputMaybe<Scalars['String']>;
   chain?: InputMaybe<Chain>;
@@ -936,7 +985,6 @@ export type QueryNftCollectionsArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryNftRouteArgs = {
   chain?: InputMaybe<Chain>;
   nftTrades: ReadonlyArray<NftTradeInput>;
@@ -945,7 +993,6 @@ export type QueryNftRouteArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryPortfoliosArgs = {
   chains?: InputMaybe<ReadonlyArray<Chain>>;
   lookupTokens?: InputMaybe<ReadonlyArray<ContractInput>>;
@@ -954,33 +1001,28 @@ export type QueryPortfoliosArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QuerySearchTokensArgs = {
   chains?: InputMaybe<ReadonlyArray<Chain>>;
   searchQuery: Scalars['String'];
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryTokenArgs = {
   address?: InputMaybe<Scalars['String']>;
   chain: Chain;
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryTokenProjectsArgs = {
   contracts: ReadonlyArray<ContractInput>;
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryTokensArgs = {
   contracts: ReadonlyArray<ContractInput>;
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryTopCollectionsArgs = {
   after?: InputMaybe<Scalars['String']>;
   chains?: InputMaybe<ReadonlyArray<Chain>>;
@@ -992,7 +1034,6 @@ export type QueryTopCollectionsArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryTopTokensArgs = {
   chain?: InputMaybe<Chain>;
   orderBy?: InputMaybe<TokenSortableField>;
@@ -1001,7 +1042,14 @@ export type QueryTopTokensArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
+export type QueryTopV2PairsArgs = {
+  chain: Chain;
+  first: Scalars['Int'];
+  tokenFilter?: InputMaybe<Scalars['String']>;
+  tvlCursor?: InputMaybe<Scalars['Float']>;
+};
+
+
 export type QueryTopV3PoolsArgs = {
   chain: Chain;
   first: Scalars['Int'];
@@ -1010,7 +1058,6 @@ export type QueryTopV3PoolsArgs = {
 };
 
 
-/**   Top-level types: Query, Mutation, Subscription: */
 export type QueryTransactionNotificationArgs = {
   address: Scalars['String'];
   chain: Chain;
@@ -1054,7 +1101,9 @@ export type SwapOrderDetails = {
   readonly offerer: Scalars['String'];
   readonly outputToken: Token;
   readonly outputTokenQuantity: Scalars['String'];
+  /** @deprecated use swapOrderStatus to disambiguate from transactionStatus */
   readonly status: SwapOrderStatus;
+  readonly swapOrderStatus: SwapOrderStatus;
 };
 
 export enum SwapOrderStatus {
@@ -1116,11 +1165,16 @@ export type TokenApprovalInput = {
   readonly approvedAddress: Scalars['String'];
   readonly asset: TokenAssetInput;
   readonly quantity: Scalars['String'];
+  readonly tokenStandard: TokenStandard;
 };
 
 export type TokenAssetInput = {
-  readonly address: Scalars['String'];
+  readonly address?: InputMaybe<Scalars['String']>;
   readonly chain: Chain;
+  readonly decimals?: InputMaybe<Scalars['Int']>;
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly standard?: InputMaybe<TokenStandard>;
+  readonly symbol?: InputMaybe<Scalars['String']>;
 };
 
 export type TokenBalance = {
@@ -1290,6 +1344,7 @@ export type TokenTransferInput = {
   readonly quantity: Scalars['String'];
   readonly recipient: Scalars['String'];
   readonly sender: Scalars['String'];
+  readonly tokenStandard: TokenStandard;
   readonly transactedValue?: InputMaybe<AmountInput>;
 };
 
@@ -1319,18 +1374,22 @@ export type TransactionDetails = {
   readonly hash: Scalars['String'];
   readonly id: Scalars['ID'];
   readonly nonce: Scalars['Int'];
+  /** @deprecated use transactionStatus to disambiguate from swapOrderStatus */
   readonly status: TransactionStatus;
   readonly to: Scalars['String'];
+  readonly transactionStatus: TransactionStatus;
   readonly type: TransactionType;
 };
 
 export type TransactionDetailsInput = {
-  readonly assetChanges: ReadonlyArray<AssetChangeInput>;
+  readonly application?: InputMaybe<ApplicationContractInput>;
+  readonly assetChanges: ReadonlyArray<InputMaybe<AssetChangeInput>>;
   readonly from: Scalars['String'];
   readonly hash: Scalars['String'];
   readonly nonce: Scalars['Int'];
-  readonly status: TransactionStatus;
+  readonly status?: InputMaybe<TransactionStatus>;
   readonly to: Scalars['String'];
+  readonly transactionStatus: TransactionStatus;
   readonly type: TransactionType;
 };
 
@@ -1371,6 +1430,27 @@ export enum TransactionType {
   Unstake = 'UNSTAKE',
   Withdraw = 'WITHDRAW'
 }
+
+export type V2Pair = {
+  readonly __typename?: 'V2Pair';
+  readonly address: Scalars['String'];
+  readonly chain: Chain;
+  readonly createdAtTimestamp?: Maybe<Scalars['Int']>;
+  readonly cumulativeVolume?: Maybe<Amount>;
+  readonly id: Scalars['ID'];
+  readonly protocolVersion: ProtocolVersion;
+  readonly token0?: Maybe<Token>;
+  readonly token0Supply?: Maybe<Scalars['Float']>;
+  readonly token1?: Maybe<Token>;
+  readonly token1Supply?: Maybe<Scalars['Float']>;
+  readonly totalLiquidity?: Maybe<Amount>;
+  readonly txCount?: Maybe<Scalars['Int']>;
+};
+
+
+export type V2PairCumulativeVolumeArgs = {
+  duration?: InputMaybe<HistoryDuration>;
+};
 
 export type V3Pool = {
   readonly __typename?: 'V3Pool';

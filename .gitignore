@@ -94,3 +94,41 @@ artifacts-zk
 cache-zk
 
 deployments
+
+/.pnp
+.pnp.js
+.vscode
+
+# lingui
+/src/locales/**/*.js
+/src/locales/en/messages.po
+/src/locales/_build/
+
+# testing
+/coverage
+
+# testing
+/coverage
+cypress/videos
+cypress/screenshots
+cypress/fixtures/example.json
+**/packages/**/coverage
+
+**/apps/web/config/abi/types
+**/packages/smart-router/evm/abis/types
+**/packages/pools/src/abis/types
+
+vite.config.ts.timestamp-*.mjs
+
+# Sentry
+.sentryclirc
+
+# turbo
+.turbo
+.vercel
+
+# store for local dev scripts
+scripts/dev/**
+
+# typescript
+*.tsbuildinfo
