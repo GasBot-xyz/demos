@@ -650,8 +650,8 @@ importers:
         specifier: ^5.5.1
         version: 5.5.1(@datadog/browser-logs@5.2.0)
       '@gasbot/widget':
-        specifier: ^0.2.41
-        version: 0.2.41(@types/react-dom@18.2.15)(@types/react@18.2.37)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.2.42
+        version: 0.2.42(@types/react-dom@18.2.15)(@types/react@18.2.37)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0)
       '@gelatonetwork/limit-orders-lib':
         specifier: ^4.1.0
         version: 4.5.0(encoding@0.1.13)
@@ -5735,8 +5735,8 @@ packages:
   /@floating-ui/utils@0.1.6:
     resolution: {integrity: sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==}
 
-  /@gasbot/widget@0.2.41(@types/react-dom@18.2.15)(@types/react@18.2.37)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-z8/x8dCHU/eDYoHPMqTnj+CxbIdLmXNpwVuOebMVXGhdvRfNWYUnS6xTnm4RcKwnEk1bnGIXFhZ/PDqgV4MENg==}
+  /@gasbot/widget@0.2.42(@types/react-dom@18.2.15)(@types/react@18.2.37)(ethers@5.7.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-p+rYFW0Y4rleOJ11K17JudNRkhVDQVVFkEHRalp0jUIwtHiebUPsOyVWEOL6Qkk1JZmFjTN487R50ufvWlr7gA==}
     peerDependencies:
       ethers: ^5.0.0 || ^6.0.0
       react: ^18.2.0
@@ -19534,7 +19534,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 18.18.9
+      '@types/node': 13.13.52
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
