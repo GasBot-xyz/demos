@@ -33,6 +33,7 @@ export type Scalars = {
 export type ActivityDetails = SwapOrderDetails | TransactionDetails;
 
 export type ActivityDetailsInput = {
+  readonly swapOrderDetails?: InputMaybe<SwapOrderDetailsInput>;
   readonly transactionDetails?: InputMaybe<TransactionDetailsInput>;
 };
 
@@ -225,13 +226,21 @@ export type DimensionsInput = {
   readonly width?: InputMaybe<Scalars['Float']>;
 };
 
+export type FeeData = {
+  readonly __typename?: 'FeeData';
+  readonly buyFeeBps?: Maybe<Scalars['String']>;
+  readonly sellFeeBps?: Maybe<Scalars['String']>;
+};
+
 export enum HighLow {
   High = 'HIGH',
   Low = 'LOW'
 }
 
+/**   FIVE_MINUTE is only supported for TokenMarket.pricePercentChange */
 export enum HistoryDuration {
   Day = 'DAY',
+  FiveMinute = 'FIVE_MINUTE',
   Hour = 'HOUR',
   Max = 'MAX',
   Month = 'MONTH',
@@ -903,6 +912,8 @@ export type PushNotification = {
 export type Query = {
   readonly __typename?: 'Query';
   readonly convert?: Maybe<Amount>;
+  readonly dailyProtocolTvl?: Maybe<ReadonlyArray<TimestampedAmount>>;
+  readonly historicalProtocolVolume?: Maybe<ReadonlyArray<TimestampedAmount>>;
   readonly nftActivity?: Maybe<NftActivityConnection>;
   readonly nftAssets?: Maybe<NftAssetConnection>;
   readonly nftBalances?: Maybe<NftBalanceConnection>;
@@ -926,12 +937,27 @@ export type Query = {
   /**   returns top v3 pools sorted by total value locked in desc order */
   readonly topV3Pools?: Maybe<ReadonlyArray<V3Pool>>;
   readonly transactionNotification?: Maybe<TransactionNotification>;
+  readonly v2Pair?: Maybe<V2Pair>;
+  readonly v3Pool?: Maybe<V3Pool>;
 };
 
 
 export type QueryConvertArgs = {
   fromAmount: CurrencyAmountInput;
   toCurrency: Currency;
+};
+
+
+export type QueryDailyProtocolTvlArgs = {
+  chain: Chain;
+  version: ProtocolVersion;
+};
+
+
+export type QueryHistoricalProtocolVolumeArgs = {
+  chain: Chain;
+  duration: HistoryDuration;
+  version: ProtocolVersion;
 };
 
 
@@ -1064,6 +1090,18 @@ export type QueryTransactionNotificationArgs = {
   transactionHash: Scalars['String'];
 };
 
+
+export type QueryV2PairArgs = {
+  address: Scalars['String'];
+  chain: Chain;
+};
+
+
+export type QueryV3PoolArgs = {
+  address: Scalars['String'];
+  chain: Chain;
+};
+
 export enum SafetyLevel {
   Blocked = 'BLOCKED',
   MediumWarning = 'MEDIUM_WARNING',
@@ -1106,9 +1144,22 @@ export type SwapOrderDetails = {
   readonly swapOrderStatus: SwapOrderStatus;
 };
 
+export type SwapOrderDetailsInput = {
+  readonly expiry: Scalars['Int'];
+  readonly hash: Scalars['String'];
+  readonly inputAmount: Scalars['String'];
+  readonly inputToken: TokenAssetInput;
+  readonly offerer: Scalars['String'];
+  readonly outputAmount: Scalars['String'];
+  readonly outputToken: TokenAssetInput;
+  readonly status?: InputMaybe<SwapOrderStatus>;
+  readonly swapOrderStatus: SwapOrderStatus;
+};
+
 export enum SwapOrderStatus {
   Error = 'ERROR',
   Expired = 'EXPIRED',
+  Filled = 'FILLED',
   InsufficientFunds = 'INSUFFICIENT_FUNDS',
   Open = 'OPEN'
 }
@@ -1121,11 +1172,20 @@ export type TimestampedAmount = IAmount & {
   readonly value: Scalars['Float'];
 };
 
+export type TimestampedPoolPrice = {
+  readonly __typename?: 'TimestampedPoolPrice';
+  readonly id: Scalars['ID'];
+  readonly timestamp: Scalars['Int'];
+  readonly token0Price: Scalars['Float'];
+  readonly token1Price: Scalars['Float'];
+};
+
 export type Token = IContract & {
   readonly __typename?: 'Token';
   readonly address?: Maybe<Scalars['String']>;
   readonly chain: Chain;
   readonly decimals?: Maybe<Scalars['Int']>;
+  readonly feeData?: Maybe<FeeData>;
   readonly id: Scalars['ID'];
   readonly market?: Maybe<TokenMarket>;
   readonly name?: Maybe<Scalars['String']>;
@@ -1173,7 +1233,7 @@ export type TokenAssetInput = {
   readonly chain: Chain;
   readonly decimals?: InputMaybe<Scalars['Int']>;
   readonly name?: InputMaybe<Scalars['String']>;
-  readonly standard?: InputMaybe<TokenStandard>;
+  readonly standard: TokenStandard;
   readonly symbol?: InputMaybe<Scalars['String']>;
 };
 
@@ -1200,6 +1260,8 @@ export type TokenInput = {
 export type TokenMarket = {
   readonly __typename?: 'TokenMarket';
   readonly fullyDilutedValuation?: Maybe<Amount>;
+  readonly historicalTvl?: Maybe<ReadonlyArray<Maybe<TimestampedAmount>>>;
+  readonly historicalVolume?: Maybe<ReadonlyArray<Maybe<TimestampedAmount>>>;
   readonly id: Scalars['ID'];
   readonly price?: Maybe<Amount>;
   readonly priceHighLow?: Maybe<Amount>;
@@ -1208,7 +1270,18 @@ export type TokenMarket = {
   readonly priceSource: PriceSource;
   readonly token: Token;
   readonly totalValueLocked?: Maybe<Amount>;
+  /**   this volume is cumulative volume over the specified duration */
   readonly volume?: Maybe<Amount>;
+};
+
+
+export type TokenMarketHistoricalTvlArgs = {
+  duration: HistoryDuration;
+};
+
+
+export type TokenMarketHistoricalVolumeArgs = {
+  duration: HistoryDuration;
 };
 
 
@@ -1449,7 +1522,7 @@ export type V2Pair = {
 
 
 export type V2PairCumulativeVolumeArgs = {
-  duration?: InputMaybe<HistoryDuration>;
+  duration: HistoryDuration;
 };
 
 export type V3Pool = {
@@ -1459,8 +1532,11 @@ export type V3Pool = {
   readonly createdAtTimestamp?: Maybe<Scalars['Int']>;
   readonly cumulativeVolume?: Maybe<Amount>;
   readonly feeTier?: Maybe<Scalars['Float']>;
+  readonly historicalVolume?: Maybe<ReadonlyArray<Maybe<TimestampedAmount>>>;
   readonly id: Scalars['ID'];
+  readonly priceHistory?: Maybe<ReadonlyArray<Maybe<TimestampedPoolPrice>>>;
   readonly protocolVersion: ProtocolVersion;
+  readonly ticks?: Maybe<ReadonlyArray<Maybe<V3PoolTick>>>;
   readonly token0?: Maybe<Token>;
   readonly token0Supply?: Maybe<Scalars['Float']>;
   readonly token1?: Maybe<Token>;
@@ -1471,7 +1547,31 @@ export type V3Pool = {
 
 
 export type V3PoolCumulativeVolumeArgs = {
-  duration?: InputMaybe<HistoryDuration>;
+  duration: HistoryDuration;
+};
+
+
+export type V3PoolHistoricalVolumeArgs = {
+  duration: HistoryDuration;
+};
+
+
+export type V3PoolPriceHistoryArgs = {
+  duration: HistoryDuration;
+};
+
+
+export type V3PoolTicksArgs = {
+  first: Scalars['Int'];
+  tickIdxCursor?: InputMaybe<Scalars['Int']>;
+};
+
+export type V3PoolTick = {
+  readonly __typename?: 'V3PoolTick';
+  readonly id: Scalars['ID'];
+  readonly liquidityGross?: Maybe<Scalars['String']>;
+  readonly liquidityNet?: Maybe<Scalars['String']>;
+  readonly tickIdx?: Maybe<Scalars['Int']>;
 };
 
 export type ConvertQueryVariables = Exact<{
