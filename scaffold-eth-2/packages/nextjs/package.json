@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.2",
-    "@gasbot/widget": "^0.3.3",
+    "@gasbot/widget": "^0.3.4",
     "@heroicons/react": "^2.0.11",
     "@rainbow-me/rainbowkit": "1.1.2",
     "@uniswap/sdk-core": "^4.0.1",
