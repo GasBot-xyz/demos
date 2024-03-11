@@ -39,7 +39,7 @@
     "@cyberlab/cyber-app-sdk": "2.4.4",
     "@datadog/browser-logs": "^5.1.0",
     "@datadog/browser-rum": "^5.5.1",
-    "@gasbot/widget": "^0.3.11",
+    "@gasbot/widget": "^0.3.15",
     "@gelatonetwork/limit-orders-lib": "^4.1.0",
     "@gnosis.pm/safe-apps-wagmi": "^1.2.0",
     "@next/bundle-analyzer": "13.0.7",
