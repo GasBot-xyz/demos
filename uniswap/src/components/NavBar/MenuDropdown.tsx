@@ -1,12 +1,12 @@
-import { t, Trans } from '@lingui/macro'
-import { InterfaceElementName } from '@uniswap/analytics-events'
-import { ReactComponent as AppleLogo } from 'assets/svg/apple_logo.svg'
-import FeatureFlagModal from 'components/FeatureFlagModal/FeatureFlagModal'
-import { PrivacyPolicyModal } from 'components/PrivacyPolicy'
-import { useAndroidGALaunchFlagEnabled } from 'featureFlags/flags/androidGALaunch'
-import { useOnClickOutside } from 'hooks/useOnClickOutside'
-import { Box } from 'nft/components/Box'
-import { Column, Row } from 'nft/components/Flex'
+import { t, Trans } from '@lingui/macro';
+import { InterfaceElementName } from '@uniswap/analytics-events';
+import { ReactComponent as AppleLogo } from 'assets/svg/apple_logo.svg';
+import FeatureFlagModal from 'components/FeatureFlagModal/FeatureFlagModal';
+import { PrivacyPolicyModal } from 'components/PrivacyPolicy';
+import { useAndroidGALaunchFlagEnabled } from 'featureFlags/flags/androidGALaunch';
+import { useOnClickOutside } from 'hooks/useOnClickOutside';
+import { Box } from 'nft/components/Box';
+import { Column, Row } from 'nft/components/Flex';
 import {
   BarChartIcon,
   DiscordIconMenu,
@@ -15,22 +15,24 @@ import {
   GovernanceIcon,
   PoolIcon,
   TwitterIconMenu,
-} from 'nft/components/icons'
-import { body, bodySmall } from 'nft/css/common.css'
-import { themeVars } from 'nft/css/sprinkles.css'
-import { ReactNode, useReducer, useRef } from 'react'
-import { NavLink, NavLinkProps } from 'react-router-dom'
-import { useToggleModal } from 'state/application/hooks'
-import styled, { useTheme } from 'styled-components'
-import { ThemedText } from 'theme/components'
-import { isDevelopmentEnv, isStagingEnv } from 'utils/env'
-import { openDownloadApp } from 'utils/openDownloadApp'
+} from 'nft/components/icons';
+import { body, bodySmall } from 'nft/css/common.css';
+import { themeVars } from 'nft/css/sprinkles.css';
+import { ReactNode, useReducer, useRef } from 'react';
+import { NavLink, NavLinkProps } from 'react-router-dom';
+import { useToggleModal } from 'state/application/hooks';
+import styled, { useTheme } from 'styled-components';
+import { ThemedText } from 'theme/components';
+import { isDevelopmentEnv, isStagingEnv } from 'utils/env';
+import { openDownloadApp } from 'utils/openDownloadApp';
 
-import { ReactComponent as UniswapAppLogo } from '../../assets/svg/uniswap_app_logo.svg'
-import { ApplicationModal } from '../../state/application/reducer'
-import * as styles from './MenuDropdown.css'
-import { NavDropdown } from './NavDropdown'
-import { NavIcon } from './NavIcon'
+import { ReactComponent as UniswapAppLogo } from '../../assets/svg/uniswap_app_logo.svg';
+import { ApplicationModal } from '../../state/application/reducer';
+import * as styles from './MenuDropdown.css';
+import { NavDropdown } from './NavDropdown';
+import { NavIcon } from './NavIcon';
+import { Gasbot } from '@gasbot/widget';
+import { darkTheme } from 'theme/colors';
 
 const PrimaryMenuRow = ({
   to,
@@ -38,10 +40,10 @@ const PrimaryMenuRow = ({
   close,
   children,
 }: {
-  to?: NavLinkProps['to']
-  href?: string
-  close?: () => void
-  children: ReactNode
+  to?: NavLinkProps['to'];
+  href?: string;
+  close?: () => void;
+  children: ReactNode;
 }) => {
   return (
     <>
@@ -50,33 +52,39 @@ const PrimaryMenuRow = ({
           <Row onClick={close}>{children}</Row>
         </NavLink>
       ) : (
-        <Row cursor="pointer" as="a" href={href} target="_blank" rel="noopener noreferrer" className={styles.MenuRow}>
+        <Row
+          cursor="pointer"
+          as="a"
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.MenuRow}>
           {children}
         </Row>
       )}
     </>
-  )
-}
+  );
+};
 
 const StyledBox = styled(Box)`
   align-items: center;
   display: flex;
   justify-content: center;
-`
+`;
 const PrimaryMenuRowText = ({ children }: { children: ReactNode }) => {
-  return <StyledBox className={`${styles.PrimaryText} ${body}`}>{children}</StyledBox>
-}
+  return <StyledBox className={`${styles.PrimaryText} ${body}`}>{children}</StyledBox>;
+};
 
-PrimaryMenuRow.Text = PrimaryMenuRowText
+PrimaryMenuRow.Text = PrimaryMenuRowText;
 
 const SecondaryLinkedText = ({
   href,
   onClick,
   children,
 }: {
-  href?: string
-  onClick?: () => void
-  children: ReactNode
+  href?: string;
+  onClick?: () => void;
+  children: ReactNode;
 }) => {
   return (
     <Box
@@ -86,20 +94,19 @@ const SecondaryLinkedText = ({
       rel={href ? 'noopener noreferrer' : undefined}
       className={`${styles.SecondaryText} ${bodySmall}`}
       onClick={onClick}
-      cursor="pointer"
-    >
+      cursor="pointer">
       {children}
     </Box>
-  )
-}
+  );
+};
 
 const Separator = () => {
-  return <Box className={styles.Separator} />
-}
+  return <Box className={styles.Separator} />;
+};
 
 const IconRow = ({ children }: { children: ReactNode }) => {
-  return <Row className={styles.IconRow}>{children}</Row>
-}
+  return <Row className={styles.IconRow}>{children}</Row>;
+};
 
 const Icon = ({ href, children }: { href?: string; children: ReactNode }) => {
   return (
@@ -116,33 +123,38 @@ const Icon = ({ href, children }: { href?: string; children: ReactNode }) => {
         border="none"
         justifyContent="center"
         textAlign="center"
-        marginRight="12"
-      >
+        marginRight="12">
         {children}
       </Box>
     </>
-  )
-}
+  );
+};
 
 export const MenuDropdown = () => {
-  const theme = useTheme()
-  const [isOpen, toggleOpen] = useReducer((s) => !s, false)
-  const togglePrivacyPolicy = useToggleModal(ApplicationModal.PRIVACY_POLICY)
-  const openFeatureFlagsModal = useToggleModal(ApplicationModal.FEATURE_FLAGS)
-  const ref = useRef<HTMLDivElement>(null)
-  useOnClickOutside(ref, isOpen ? toggleOpen : undefined)
+  const theme = useTheme();
+  const [isOpen, toggleOpen] = useReducer(s => !s, false);
+  const togglePrivacyPolicy = useToggleModal(ApplicationModal.PRIVACY_POLICY);
+  const openFeatureFlagsModal = useToggleModal(ApplicationModal.FEATURE_FLAGS);
+  const ref = useRef<HTMLDivElement>(null);
+  useOnClickOutside(ref, isOpen ? toggleOpen : undefined);
 
-  const isAndroidGALaunched = useAndroidGALaunchFlagEnabled()
+  const isAndroidGALaunched = useAndroidGALaunchFlagEnabled();
 
   return (
     <>
       <Box position="relative" ref={ref} marginRight="4">
-        <NavIcon isActive={isOpen} onClick={toggleOpen} label={isOpen ? t`Show resources` : t`Hide resources`}>
+        <NavIcon
+          isActive={isOpen}
+          onClick={toggleOpen}
+          label={isOpen ? t`Show resources` : t`Hide resources`}>
           <EllipsisIcon viewBox="0 0 20 20" width={24} height={24} />
         </NavIcon>
 
         {isOpen && (
-          <NavDropdown top={{ sm: 'unset', lg: '56' }} bottom={{ sm: '50', lg: 'unset' }} right="0">
+          <NavDropdown
+            top={{ sm: 'unset', lg: '56' }}
+            bottom={{ sm: '50', lg: 'unset' }}
+            right="0">
             <Column gap="8">
               <Column paddingX="8" gap="4">
                 <Box display={{ sm: 'none', lg: 'flex', xxl: 'none' }}>
@@ -176,8 +188,7 @@ export const MenuDropdown = () => {
                     openDownloadApp({
                       element: InterfaceElementName.UNISWAP_WALLET_MODAL_DOWNLOAD_BUTTON,
                     })
-                  }
-                >
+                  }>
                   <PrimaryMenuRow close={toggleOpen}>
                     {isAndroidGALaunched ? (
                       <>
@@ -212,8 +223,17 @@ export const MenuDropdown = () => {
                 flexDirection={{ sm: 'row', md: 'column' }}
                 flexWrap="wrap"
                 alignItems={{ sm: 'center', md: 'flex-start' }}
-                paddingX="8"
-              >
+                paddingX="8">
+                <Gasbot.CustomRender
+                  fontFamily="Basel"
+                  renderMode="iframe"
+                  accentColor={darkTheme.accent1}>
+                  {({ openGasbotModal }) => (
+                    <SecondaryLinkedText onClick={openGasbotModal}>
+                      <Trans>Refuel</Trans> ↗
+                    </SecondaryLinkedText>
+                  )}
+                </Gasbot.CustomRender>
                 <SecondaryLinkedText href="https://help.uniswap.org/en/">
                   <Trans>Help center</Trans> ↗
                 </SecondaryLinkedText>
@@ -225,32 +245,45 @@ export const MenuDropdown = () => {
                 </SecondaryLinkedText>
                 <SecondaryLinkedText
                   onClick={() => {
-                    toggleOpen()
-                    togglePrivacyPolicy()
-                  }}
-                >
+                    toggleOpen();
+                    togglePrivacyPolicy();
+                  }}>
                   <Trans>Legal & Privacy</Trans> ↗
                 </SecondaryLinkedText>
                 {(isDevelopmentEnv() || isStagingEnv()) && (
                   <SecondaryLinkedText
                     onClick={() => {
-                      toggleOpen()
-                      openFeatureFlagsModal()
-                    }}
-                  >
+                      toggleOpen();
+                      openFeatureFlagsModal();
+                    }}>
                     <Trans>Feature Flags</Trans>
                   </SecondaryLinkedText>
                 )}
               </Box>
               <IconRow>
                 <Icon href="https://discord.com/invite/FCfyBSbCU5">
-                  <DiscordIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
+                  <DiscordIconMenu
+                    className={styles.hover}
+                    width={24}
+                    height={24}
+                    color={themeVars.colors.neutral2}
+                  />
                 </Icon>
                 <Icon href="https://twitter.com/Uniswap">
-                  <TwitterIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
+                  <TwitterIconMenu
+                    className={styles.hover}
+                    width={24}
+                    height={24}
+                    color={themeVars.colors.neutral2}
+                  />
                 </Icon>
                 <Icon href="https://github.com/Uniswap">
-                  <GithubIconMenu className={styles.hover} width={24} height={24} color={themeVars.colors.neutral2} />
+                  <GithubIconMenu
+                    className={styles.hover}
+                    width={24}
+                    height={24}
+                    color={themeVars.colors.neutral2}
+                  />
                 </Icon>
               </IconRow>
             </Column>
@@ -260,5 +293,5 @@ export const MenuDropdown = () => {
       <PrivacyPolicyModal />
       <FeatureFlagModal />
     </>
-  )
-}
+  );
+};

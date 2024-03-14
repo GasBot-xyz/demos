@@ -1,27 +1,27 @@
-import '@gasbot/widget/style.css'
+import '@gasbot/widget/style.css';
 
-import { Gasbot, GasbotConfig } from '@gasbot/widget'
-import { Trans } from '@lingui/macro'
-import { Percent } from '@uniswap/sdk-core'
-import { useWeb3React } from '@web3-react/core'
-import { InterfaceTrade } from 'state/routing/types'
-import styled from 'styled-components'
-import { darkTheme } from 'theme/colors'
-import { ThemedText } from 'theme/components'
+import { Gasbot, GasbotConfig } from '@gasbot/widget';
+import { Trans } from '@lingui/macro';
+import { Percent } from '@uniswap/sdk-core';
+import { useWeb3React } from '@web3-react/core';
+import { InterfaceTrade } from 'state/routing/types';
+import styled from 'styled-components';
+import { darkTheme } from 'theme/colors';
+import { ThemedText } from 'theme/components';
 
-import { RowBetween, RowFixed } from '../Row'
-import SettingsTab from '../Settings'
-import SwapBuyFiatButton from './SwapBuyFiatButton'
+import { RowBetween, RowFixed } from '../Row';
+import SettingsTab from '../Settings';
+import SwapBuyFiatButton from './SwapBuyFiatButton';
 
 const StyledSwapHeader = styled(RowBetween)`
   margin-bottom: 10px;
   color: ${({ theme }) => theme.neutral2};
-`
+`;
 
 const HeaderButtonContainer = styled(RowFixed)`
   padding: 0 12px;
   gap: 16px;
-`
+`;
 
 const GasbotWrapper = styled.div`
   .gasbot > button {
@@ -34,19 +34,19 @@ const GasbotWrapper = styled.div`
     height: 1.4rem;
     color: ${({ theme }) => theme.neutral2};
   }
-`
+`;
 
 export default function SwapHeader({
   autoSlippage,
   chainId,
   trade,
 }: {
-  autoSlippage: Percent
-  chainId?: number
-  trade?: InterfaceTrade
+  autoSlippage: Percent;
+  chainId?: number;
+  trade?: InterfaceTrade;
 }) {
-  const { provider } = useWeb3React()
-  const signer = provider?.getSigner()
+  const { provider } = useWeb3React();
+  const signer = provider?.getSigner();
 
   return (
     <StyledSwapHeader>
@@ -67,5 +67,5 @@ export default function SwapHeader({
         <SettingsTab autoSlippage={autoSlippage} chainId={chainId} trade={trade} />
       </RowFixed>
     </StyledSwapHeader>
-  )
+  );
 }
