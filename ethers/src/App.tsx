@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
-import { ethers, JsonRpcSigner } from "ethers";
+import { useCallback, useEffect, useState } from 'react';
+import { ethers, JsonRpcSigner } from 'ethers';
 
-import "@gasbot/widget/style.css";
-import { Gasbot } from "@gasbot/widget";
+import '@flexy.tech/widget/style.css';
+import { Flexy } from '@flexy.tech/widget';
 
 function App() {
   const [signer, setSigner] = useState<JsonRpcSigner>();
@@ -15,31 +15,30 @@ function App() {
 
       setSigner(currentSigner);
 
-      ethereum.on("accountsChanged", async () => {
+      ethereum.on('accountsChanged', async () => {
         setSigner(undefined);
       });
     }
   }, [ethereum]);
 
   useEffect(() => {
-    ethereum?.on("chainChanged", () => {
-      connect()
+    ethereum?.on('chainChanged', () => {
+      connect();
     });
   }, [connect, ethereum]);
 
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
-        display: "grid",
-        placeItems: "center",
-      }}
-    >
+        width: '100vw',
+        height: '100vh',
+        display: 'grid',
+        placeItems: 'center',
+      }}>
       {!signer ? (
         <button onClick={connect}>Connect</button>
       ) : (
-        <Gasbot walletClientOrSigner={signer} />
+        <Flexy walletClientOrSigner={signer} />
       )}
     </div>
   );

@@ -31,7 +31,7 @@ import { ApplicationModal } from '../../state/application/reducer';
 import * as styles from './MenuDropdown.css';
 import { NavDropdown } from './NavDropdown';
 import { NavIcon } from './NavIcon';
-import { Gasbot } from '@gasbot/widget';
+import { Flexy } from '@flexy.tech/widget';
 import { darkTheme } from 'theme/colors';
 
 const PrimaryMenuRow = ({
@@ -224,16 +224,16 @@ export const MenuDropdown = () => {
                 flexWrap="wrap"
                 alignItems={{ sm: 'center', md: 'flex-start' }}
                 paddingX="8">
-                <Gasbot.CustomRender
+                <Flexy.CustomRender
                   fontFamily="Basel"
                   renderMode="iframe"
                   accentColor={darkTheme.accent1}>
-                  {({ openGasbotModal }) => (
-                    <SecondaryLinkedText onClick={openGasbotModal}>
+                  {({ openFlexyModal }) => (
+                    <SecondaryLinkedText onClick={openFlexyModal}>
                       <Trans>Refuel</Trans> ↗
                     </SecondaryLinkedText>
                   )}
-                </Gasbot.CustomRender>
+                </.CustomRender>
                 <SecondaryLinkedText href="https://help.uniswap.org/en/">
                   <Trans>Help center</Trans> ↗
                 </SecondaryLinkedText>

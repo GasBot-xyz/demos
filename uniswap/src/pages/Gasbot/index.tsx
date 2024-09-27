@@ -1,6 +1,6 @@
-import '@gasbot/widget/style.css';
+import '@flexy.tech/widget/style.css';
 
-import { Gasbot } from '@gasbot/widget';
+import { Flexy } from '@flexy.tech/widget';
 import { InterfacePageName } from '@uniswap/analytics-events';
 import { useWeb3React } from '@web3-react/core';
 import { Trace } from 'analytics';
@@ -16,7 +16,7 @@ export default function GasbotPage() {
       <PageWrapper>
         <div style={{ width: 'fit-content', margin: 'auto' }}>
           {signer && (
-            <Gasbot
+            <Flexy
               renderMode="component"
               avoidChainSwitching
               accentColor={darkTheme.accent1}
