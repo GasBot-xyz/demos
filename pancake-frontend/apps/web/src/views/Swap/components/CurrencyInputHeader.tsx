@@ -31,11 +31,11 @@ import InternalLink from 'components/Links'
 import Image from 'next/image'
 import { SUPPORT_BUY_CRYPTO } from 'config/constants/supportChains'
 import { useWalletClient } from 'wagmi'
-import { Gasbot } from '@gasbot/widget'
+import { Flexy } from '@flexy.tech/widget'
 import { SettingsMode } from '../../../components/Menu/GlobalSettings/types'
 import { SwapFeaturesContext } from '../SwapFeaturesContext'
 import BuyCryptoIcon from '../../../../public/images/moneyBangs.svg'
-import '@gasbot/widget/style.css'
+import '@flexy.tech/widget/style.css'
 
 interface Props {
   title: string | ReactElement
@@ -52,19 +52,19 @@ const ColoredIconButton = styled(IconButton)`
   overflow: hidden;
 `
 
-const GasbotWrapper = styled.div`
+const FlexyWrapper = styled.div`
   display: grid;
   place-items: center;
 
-  .gasbot > button {
+  .flexy > button {
     height: fit-content;
     background: transparent;
   }
 
-  .gasbot > button > svg {
+  .flexy > button > svg {
     width: 1.4rem;
     height: 1.4rem;
-    color: #B8ACD2;
+    color: #b8acd2;
   }
 `
 
@@ -131,9 +131,9 @@ const CurrencyInputHeader: React.FC<React.PropsWithChildren<Props>> = memo(
           <Swap.CurrencyInputHeaderSubTitle>{subtitle}</Swap.CurrencyInputHeaderSubTitle>
         </Flex>
         <Flex width="100%" justifyContent="end">
-          <GasbotWrapper>
-            <Gasbot walletClientOrSigner={data} accentColor="#1DC7D3" />
-          </GasbotWrapper>
+          <FlexyWrapper>
+            <Flexy walletClientOrSigner={data} accentColor="#1DC7D3" />
+          </FlexyWrapper>
           {SUPPORT_BUY_CRYPTO.includes(chainId) ? (
             <Flex alignItems="center" justifyContent="center" px="4px" mt="5px">
               <TooltipText

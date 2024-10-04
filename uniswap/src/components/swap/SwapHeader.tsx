@@ -1,6 +1,6 @@
-import '@gasbot/widget/style.css';
+import '@flexy.tech/widget/style.css';
 
-import { Gasbot, GasbotConfig } from '@gasbot/widget';
+import { Flexy, FlexyConfig } from '@flexy.tech/widget';
 import { Trans } from '@lingui/macro';
 import { Percent } from '@uniswap/sdk-core';
 import { useWeb3React } from '@web3-react/core';
@@ -58,10 +58,10 @@ export default function SwapHeader({
       </HeaderButtonContainer>
       <RowFixed>
         <GasbotWrapper>
-          <Gasbot
+          <Flexy
             walletClientOrSigner={signer}
             accentColor={darkTheme.accent1}
-            limitDestination={chainId as GasbotConfig['limitDestination']}
+            limitDestination={chainId as FlexyConfig['limitDestination']}
           />
         </GasbotWrapper>
         <SettingsTab autoSlippage={autoSlippage} chainId={chainId} trade={trade} />

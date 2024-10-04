@@ -2,8 +2,8 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Gasbot } from "@gasbot/widget";
-import "@gasbot/widget/style.css";
+import { Flexy } from "@flexy.tech/widget";
+import "@flexy.tech/widget/style.css";
 import { useWalletClient } from "wagmi";
 import { Bars3Icon, BugAntIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
@@ -108,7 +108,7 @@ export const Header = () => {
         <RainbowKitCustomConnectButton />
         <FaucetButton />
         <div className="scale-75 ml-1">
-          <Gasbot walletClientOrSigner={data} />
+          <Flexy walletClientOrSigner={data} />
         </div>
       </div>
     </div>
