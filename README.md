@@ -1,3 +1,3 @@
-# Gasbot Widget Demos
+# Flexy Widget Demos
 
-A repository showing various demos on how to integrate gasbot into a dapp
+A repository showing various demos on how to integrate Flexy into a dapp
